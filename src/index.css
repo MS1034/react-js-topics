@@ -1,0 +1,28 @@
+
+
+#root {
+  --bs-body-font-family: "Poppins", sans-serif;
+  --bs-body-sans-serif: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+}
+.ubuntu
+{
+  font-family: "Ubuntu Mono", monospace;
+  color: blue;
+}
+
+.yusei-magic {
+  font-family: "Yusei Magic", sans-serif;
+}
+
+.hidden, .close {
+  display: none;
+  }
+
+
