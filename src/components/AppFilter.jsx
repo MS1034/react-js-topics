@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TopicAPI } from "../api/TopicAPI";
 
-function AppFilter({ onVisibilityChange, handleHideButtonClick, isSelected }) {
+function AppFilter({ onVisibilityChange, handleHideButtonClick }) {
   const [isShown, setIsShown] = useState(true);
 
   return (
@@ -27,7 +27,6 @@ function AppFilter({ onVisibilityChange, handleHideButtonClick, isSelected }) {
         <button
           id="prev-button"
           className="btn btn-secondary col-sm"
-          disabled={isSelected}
           onClick={() => handleHideButtonClick(!isShown)}
         >
           {isShown ? "Hide" : "Show"}

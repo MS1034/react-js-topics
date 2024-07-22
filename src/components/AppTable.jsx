@@ -14,6 +14,7 @@ function AppTable({
   handleDeleteButtonClick,
   editedTopicChange,
   editingStatusChange,
+  masterStatus,
 }) {
   const [isMasterChecked, setIsMasterChecked] = useState(false);
 
@@ -25,6 +26,10 @@ function AppTable({
       setIsMasterChecked(allChecked);
     }
   }, [topicCheckboxes]);
+
+  useEffect(() => {
+    setIsMasterChecked(false);
+  }, [masterStatus]);
 
   const handleMasterCheckboxChange = () => {
     setIsMasterChecked(!isMasterChecked);

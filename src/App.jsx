@@ -15,6 +15,7 @@ function App() {
   const [editedTopic, setEditedTopic] = useState({});
   const [editingStatus, setEditingStatus] = useState(null);
   const [show, setShow] = useState(false);
+  const [masterStatus, setMasterStatus] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -64,6 +65,7 @@ function App() {
         toast.success(`Visibility updated sucessfully`);
       }
       console.log("Successfully updated IDs:", successfullyUpdatedIds);
+      setMasterStatus((prev) => !prev);
     } catch (error) {
       console.error("Error:", error);
       toast.error(error.message);
@@ -74,6 +76,7 @@ function App() {
     try {
       const res = await TopicAPI.delete(id);
       console.log(res);
+      console.log("I am SUbhan uuu");
       let arr = data.filter((item) => {
         console.log(item.id);
         return item.id !== id;
@@ -98,6 +101,8 @@ function App() {
       setData(arr);
       handleClose();
       toast.success("topic added successfully");
+      setEditingStatus(null);
+      console.log(editingStatus);
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -113,6 +118,8 @@ function App() {
       setData(arr);
       handleClose();
       toast.success("topic update successfully");
+      setEditingStatus(null);
+      console.log(editingStatus);
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -121,9 +128,10 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // setLoading(true);
       try {
         const res = await TopicAPI.get(visibility);
+        console.log(res);
+        console.log("Yes I am Subhan");
         setData(ToggleVisibility(res, true));
         const newCheckboxes = {};
         res.forEach((item) => (newCheckboxes[item.id] = false));
@@ -132,11 +140,7 @@ function App() {
         console.log(error.message);
         toast.error(error.message);
       }
-      // } finally {
-      //   setLoading(false);
-      // }
     };
-
     fetchData();
   }, [visibility]);
 
@@ -164,16 +168,9 @@ function App() {
           handleDeleteButtonClick={handleDeleteButtonClick}
           editedTopicChange={editedTopicChange}
           editingStatusChange={editingStatusChange}
+          masterStatus={masterStatus}
         />
         <Toaster position="bottom-right" />
-        {/* {editingStatus ? (
-          <TopicForm
-            topic={editedTopic}
-            onSubmit={handleUpdateTopic}
-            isEditing={true}
-          />
-        ) : (
-        )} */}
         <TopicForm
           topic={editedTopic}
           onSubmit={editingStatus ? handleUpdateTopic : handleAddTopic}
